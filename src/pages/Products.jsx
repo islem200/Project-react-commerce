@@ -1,9 +1,23 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useContext } from "react";
+
+import { ProductsContext } from "../context/product";
+import ProductDetails from "../components/ProductDetails";
 
 const Products = () => {
-  return (
-    <div>Products</div>
-  )
-}
+  const { product, fetchProduct } = useContext(ProductsContext);
 
-export default Products
+  useEffect(() => {
+    fetchProduct();
+  }, []);
+
+  return (
+    <div className="products-gallery">
+      {product.map((p) => (
+        <ProductDetails p={p} key={p._id} />
+      ))}
+    </div>
+  );
+};
+
+export default Products;
