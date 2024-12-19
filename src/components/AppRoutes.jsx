@@ -8,6 +8,7 @@ import Profile from "../pages/Profile";
 import Products from "../pages/Products";
 import SignUp from "../pages/SignUp";
 import Cart from "./Cart";
+import CartPage from "../pages/CartPage";
 
 const PrivateRoute = ({ element, isAuthenticated }) => {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -35,9 +36,10 @@ const AppRoutes = ({ isAuthenticated, setAuthenticated, onLogout }) => (
     <Route
       path="/cart"
       element={
-        <PrivateRoute isAuthenticated={isAuthenticated} element={<Cart />} />
+        <PrivateRoute isAuthenticated={isAuthenticated} element={<CartPage />} />
       }
     />
+    
   </Routes>
 );
 

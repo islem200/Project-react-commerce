@@ -1,6 +1,9 @@
 import React from "react";
+import { useContext } from "react";
+import CartContext from "../context/cartContext";
 
 const ProductDetails = ({ p }) => {
+  const { addToCart } = useContext(CartContext);
   return (
     <div className="flip-card">
       <div className="flip-card-inner">
@@ -13,9 +16,16 @@ const ProductDetails = ({ p }) => {
         </div>
         <div className="flip-card-back">
           <h1>{p.name}</h1>
-          <p>{p.price.toFixed(2)}dt</p>
+          <p>{p.price.toFixed(2)} TND</p>
           <p>{p.Brand}</p>
-          <button className="btn btn-secondary">Add</button>
+          <button
+            className="btn btn-success"
+            onClick={() => {
+              addToCart(p);
+            }}
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>

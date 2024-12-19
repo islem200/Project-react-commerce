@@ -2,11 +2,18 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IoCartOutline } from "react-icons/io5";
+import { useContext } from "react";
+import CartContext from "../context/cartContext";
+
 const Navbar = ({ isAuthenticated, onLogout, user }) => {
+  const { getTotalItems } = useContext(CartContext);
   const navigate = useNavigate();
   return (
     <div className="d-flex justify-content between p-2">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{width:"100vw"}}>
+      <nav
+        className="navbar navbar-expand-lg bg-body-tertiary"
+        style={{ width: "100vw" }}
+      >
         <div className="container-fluid">
           <h1 className="navbar-brand">ElectronicShop</h1>
           <button
@@ -25,7 +32,7 @@ const Navbar = ({ isAuthenticated, onLogout, user }) => {
               <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
-             
+
               {isAuthenticated ? (
                 <>
                   <NavLink className="nav-link" to="/profile">
@@ -43,7 +50,9 @@ const Navbar = ({ isAuthenticated, onLogout, user }) => {
                     </button>
                   </NavLink>
                   <NavLink>
-                    <span className="badge badge-warning text-primary">{user.name}</span>
+                    <span className="badge badge-warning text-primary">
+                      {user.name}
+                    </span>
                   </NavLink>
                 </>
               ) : (
@@ -58,12 +67,13 @@ const Navbar = ({ isAuthenticated, onLogout, user }) => {
               <NavLink className="nav-link" to="/contact">
                 Contact
               </NavLink>
-              
-              
             </div>
           </div>
         </div>
-        <IoCartOutline style={{fontSize:'50px'}} />
+        <NavLink to="/cart">
+          <IoCartOutline color="black" style={{ fontSize: "40px" }} />{" "}
+          <strong>{getTotalItems()}</strong>
+        </NavLink>
       </nav>
     </div>
   );
